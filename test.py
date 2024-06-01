@@ -1,24 +1,31 @@
 import os
-import unittest.mock
-from lab_4 import *
-
-def test_create_snapshot():
-
-    with unittest.mock.patch('os.listdir') as mock_listdir:
-        mock_listdir.return_value = ['file1.txt', 'file2.txt', 'file3.txt']
+import pytest
+from unittest.mock import patch
+from datetime import datetime
+from lab_4 import create_snapshot, snapshots_path
 
 
-        folder_path = 'C:/Users/PC/Downloads/python/snapshots'
-        create_snapshot(folder_path)
+@patch('os.listdir')
+def test_create_snapshot(mock_listdir):
+    # Arrange
+    folder_path = 'C:/Users/PC/Downloads/python/snapshots'
+    mock_listdir.return_value = ['file1.txt', 'file2.py', 'file3.jpg']
 
+    # Act
+    create_snapshot(folder_path)
 
-        snapshot_file_path = f'{snapshots_path}/{os.path.basename(folder_path)}.txt'
-        assert os.path.exists(snapshot_file_path)
+    # Assert
+    snapshot_file_path = f'{snapshots_path}/{os.path.basename(folder_path)}.txt'
+    assert os.path.exists(snapshot_file_path)
 
+    with open(snapshot_file_path, 'r') as f:
+        lines = f.readlines()
 
-        with open(snapshot_file_path, 'r') as f:
-            snapshot_contents = f.readlines()
-        assert len(snapshot_contents) == 3
-        assert 'file1.txt' in snapshot_contents[0]
-        assert 'file2.txt' in snapshot_contents[1]
-        assert 'file3.txt' in snapshot_contents[2]
+    assert len(lines) == 3
+    for i, line in enumerate(lines):
+        file_name, file_creation_time = line.strip().split()
+        assert file_name == f'file{i+1}.{"txt" if i == 0 else "py" if i == 1 else "jpg"}'
+        assert datetime.strptime(file_creation_time, '%d%m%Y%H%M%S')
+
+    # Cleanup
+    os.remove(snapshot_file_path)

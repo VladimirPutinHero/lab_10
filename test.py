@@ -4,13 +4,10 @@ from unittest.mock import patch
 from datetime import datetime
 from lab_4 import *
 
-snapshots = 'snapshots'
-
 @patch('os.listdir')
 def test_create_snapshot(mock_listdir):
     # Arrange
     folder_path = 'C:/Users/PC/Downloads/python/snapshots'
-    snapshots_path = snapshots
     mock_listdir.return_value = ['file1.txt', 'file2.py', 'file3.jpg']
 
     # Act

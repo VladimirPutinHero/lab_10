@@ -4,8 +4,8 @@ import glob
 import datetime
 import difflib
 
-
-snapshots_path = 'C:/Users/PC/Downloads/python/snapshots'
+if __name__ == '__main__':
+    snapshots_path = 'C:/Users/PC/Downloads/python/snapshots'
 
 
 def create_snapshot(folder_path):

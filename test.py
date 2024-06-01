@@ -3,7 +3,9 @@ import pytest
 from unittest.mock import patch
 from datetime import datetime
 from lab_4 import *
+
 snapshots = 'snapshots'
+
 @patch('os.listdir')
 def test_create_snapshot(mock_listdir):
     # Arrange

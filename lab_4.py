@@ -9,6 +9,9 @@ if __name__ == '__main__':
 
 
 def create_snapshot(folder_path):
+    if not snapshots_path:
+        snapshots_path = 'snapshots'
+
     files = os.listdir(folder_path)
     with open(f'{snapshots_path}/{os.path.basename(folder_path)}.txt', 'w') as f:
         for file in files:

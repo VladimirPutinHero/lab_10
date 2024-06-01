@@ -8,8 +8,9 @@ snapshots_path = 'snapshots'
 
 
 def create_snapshot(folder_path):
-    if not snapshots_path:
-        snapshots_path = 'snapshots'
+    snapshots_path = 'snapshots'
+    if not os.path.exists(snapshots_path):
+        os.makedirs(snapshots_path)
 
     files = os.listdir(folder_path)
     with open(f'{snapshots_path}/{os.path.basename(folder_path)}.txt', 'w') as f:

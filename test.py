@@ -7,7 +7,7 @@ from lab_4 import *
 @patch('os.listdir')
 def test_create_snapshot(mock_listdir):
     # Arrange
-    folder_path = 'C:/Users/PC/Downloads/python/snapshots'
+    snapshot_path = 'C:/Users/PC/Downloads/python/snapshots'
     mock_listdir.return_value = ['file1.txt', 'file2.py', 'file3.jpg']
 
     # Act

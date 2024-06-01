@@ -5,7 +5,7 @@ import datetime
 import difflib
 
 if __name__ == '__main__':
-    snapshots_path = 'C:/Users/PC/Downloads/python/snapshots'
+    snapshots_path = snapshots
 
 
 def create_snapshot(folder_path):

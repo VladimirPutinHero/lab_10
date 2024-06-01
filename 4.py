@@ -4,7 +4,7 @@ import glob
 import datetime
 import difflib
 
-# C:\Users\PC\Desktop\тестт
+
 snapshots_path = 'C:/Users/PC/Downloads/python/snapshots'
 
 
